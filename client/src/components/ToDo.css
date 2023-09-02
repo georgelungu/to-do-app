@@ -50,13 +50,13 @@
     color: black;
     visibility: hidden;
     opacity: 0;
-    font-size: 18px;
+    font-size: 16px;
     margin-right: 20px;
     padding-left: 20px;
     -webkit-transition: .2s linear;
     transition: .2s linear;
     font-weight: bold;
-    text-transform: uppercase;
+    /* text-transform: uppercase; */
   }
   
   .icon-wrapper {

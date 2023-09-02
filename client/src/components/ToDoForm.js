@@ -22,6 +22,8 @@ function TodoForm({ addTodo })
         value={value}
         onChange={e => setValue(e.target.value)}
       />
+      {/* The button also handle the onSubmit function. */}
+      <button className="add">Add</button>
     </form>
   );
 }

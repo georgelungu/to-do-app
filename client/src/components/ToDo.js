@@ -8,6 +8,8 @@ function Todo({ todo, index, completeTodo, removeTodo }) {
         style={{ textDecoration: todo.isCompleted ? "line-through" : "" }}
       >
         {todo.text}
+        
+        {/* Complete Button */}
         <div className="button-container">
           <button className="complete" onClick={() => completeTodo(index)}>
             <span className="circle1" />
@@ -17,12 +19,11 @@ function Todo({ todo, index, completeTodo, removeTodo }) {
             <span className="circle5" />
             <span className="text">{todo.isCompleted ? "Completed" : "Complete"}</span>
           </button>
+          {/* End Complete Button */}
 
-          {/* <button className="remove" onClick={() => removeTodo(index)}>
-            x
-          </button> */}
+          {/* Delete Button */}
           <button className="btn" onClick={() => removeTodo(index)}>
-            <p className="paragraph"> delete </p>
+            <p className="paragraph"> Delete </p>
             <span className="icon-wrapper">
               <svg
                 className="icon"
@@ -42,6 +43,7 @@ function Todo({ todo, index, completeTodo, removeTodo }) {
               </svg>
             </span>
           </button>
+          {/* End Delete Button */}
         </div>
       </div>
     );
