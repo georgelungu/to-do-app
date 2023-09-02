@@ -5,6 +5,7 @@ import './App.css';
 
 function App() 
 {
+  console.log("The front-end works on localhost:3000.")
 
   const [todos, setTodos] = useState
   ([
@@ -26,6 +27,7 @@ function App()
   {
     const newTodos = [...todos, { text }];
     setTodos(newTodos);
+    // create a POST request here maybe...
   };
 
   const completeTodo = index => 
