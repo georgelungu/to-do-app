@@ -1,0 +1,16 @@
+.form{
+    /* background-color: blueviolet; */
+    display: flex;
+    align-items: center;
+    justify-content: start;
+}
+
+.input{
+    width: 300px;
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 6px;
+    padding: 3px 10px;
+    border: none;
+    background: #e8e8e8;
+}
