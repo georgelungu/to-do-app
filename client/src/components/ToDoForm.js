@@ -21,7 +21,7 @@ function TodoForm({ addTodo })
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify
       ({ 
-        todo: value // sending valid JSON data in your POST request's body.
+        todo: value // sending valid JSON data in the POST request's body.
       }), 
     })
 

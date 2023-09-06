@@ -7,21 +7,7 @@ function App()
 {
   console.log("The front-end works on localhost:3000.")
 
-  const [todos, setTodos] = useState
-  ([
-    {
-      text: "Learn about React",
-      isCompleted: false
-    },
-    {
-      text: "Meet friend for lunch",
-      isCompleted: false
-    },
-    {
-      text: "Build really cool todo app",
-      isCompleted: false
-    }
-  ]);
+  const [todos, setTodos] = useState([]);
 
   useEffect(() => {
     fetch("http://localhost:5000/api/todo")
