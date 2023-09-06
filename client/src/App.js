@@ -7,16 +7,6 @@ function App()
 {
   console.log("The front-end works on localhost:3000.")
 
-  // useEffect(() => {
-  //   fetch("http://localhost:5000/api/todo")
-  //     .then(res => res.json())
-  //     .then(data => {
-  //       console.log("DATA RECEIVED FROM SERVER: ", data);
-  //       // setTodos(data); // Update the todos state with the data from the server
-  //     })
-  //     .catch(error => console.error("Error:", error));
-  // }, []); // The empty array [] ensures that this effect runs only once on mount
-
   const [todos, setTodos] = useState
   ([
     {
