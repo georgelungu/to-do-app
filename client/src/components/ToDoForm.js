@@ -10,7 +10,33 @@ function TodoForm({ addTodo })
     e.preventDefault();
     if (!value) return;
     addTodo(value);
+
+    console.log("TO DO FORM VALUE: ", value)
+
     setValue("");
+
+    fetch("http://localhost:5000/api/todo", 
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify
+      ({ 
+        todo: value // sending valid JSON data in your POST request's body.
+      }), 
+    })
+
+      .then((response) => response.json())
+
+      .then((response) => 
+      {
+        console.log("FETCH RESPONSE: ", response);
+      })
+
+      .catch((error) => 
+      {
+        console.log(error);
+      });
+      
   };
 
   return (

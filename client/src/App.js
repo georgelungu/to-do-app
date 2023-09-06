@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import Todo from './components/ToDo';
 import TodoForm from './components/ToDoForm';
 import './App.css';
@@ -6,6 +6,16 @@ import './App.css';
 function App() 
 {
   console.log("The front-end works on localhost:3000.")
+
+  // useEffect(() => {
+  //   fetch("http://localhost:5000/api/todo")
+  //     .then(res => res.json())
+  //     .then(data => {
+  //       console.log("DATA RECEIVED FROM SERVER: ", data);
+  //       // setTodos(data); // Update the todos state with the data from the server
+  //     })
+  //     .catch(error => console.error("Error:", error));
+  // }, []); // The empty array [] ensures that this effect runs only once on mount
 
   const [todos, setTodos] = useState
   ([
@@ -23,11 +33,23 @@ function App()
     }
   ]);
 
+  useEffect(() => {
+    fetch("http://localhost:5000/api/todo")
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("DATA RECEIVED FROM SERVER: ", data);
+        const newTodos = data.map((item) => ({text: item.title, isCompleted: false})
+        )
+        console.log("MAPPED DATA FROM FETCH: ", newTodos);
+        setTodos(newTodos); // Update the todos state with the data from the server
+      })
+      .catch((error) => console.error("Error:", error));
+  }, []);
+
   const addTodo = text => 
   {
     const newTodos = [...todos, { text }];
     setTodos(newTodos);
-    // create a POST request here maybe...
   };
 
   const completeTodo = index => 
