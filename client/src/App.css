@@ -34,3 +34,9 @@
   margin-bottom: 6px;
   padding: 3px 10px;
 }
+
+#show{
+  display: flex;
+  justify-content: flex-end;
+  margin: 5px;
+}

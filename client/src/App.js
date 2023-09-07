@@ -9,6 +9,8 @@ function App()
 
   const [todos, setTodos] = useState([]);
 
+  const [show, setShow] = useState(false);
+
   useEffect(() => {
     fetch("http://localhost:5000/api/todo")
       .then((res) => res.json())
@@ -42,12 +44,25 @@ function App()
     setTodos(newTodos);
   };
 
+  function isOn()
+  {
+    setShow(prevShow => !prevShow);
+  }
+
   return (
     <div className="app">
       <div className="todo-list">
-      <label id='label'>TO DO LIST</label>
-        {todos.map((todo, index) => 
-        (
+        <label id="label">TO DO LIST</label>
+        <div id="show" onClick={isOn}>
+          <button className="complete">
+            <span className="circle1" />
+            <span className="circle2" />
+            <span className="circle3" />
+            <span className="circle4" />
+            <span className="circle5" />
+            <span className="text">{show ? "Hide Todo's" : "Show Todo's"}</span>
+          </button>
+        </div>{show ? todos.map((todo, index) => (
           <Todo
             key={index}
             index={index}
@@ -55,8 +70,7 @@ function App()
             completeTodo={completeTodo}
             removeTodo={removeTodo}
           />
-        ))}
-
+        )) : null}
         <TodoForm addTodo={addTodo} />
       </div>
     </div>
