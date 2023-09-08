@@ -50,7 +50,7 @@ app.get("/api/todo", (req, res) =>
     .then((todos) => 
     {
       res.json(todos);
-      console.log("DATA SENT BACK TO CLIENT: ", todos)
+      console.log("DATA SENT BACK TO CLIENT FROM GET REQ: ", todos)
     })
     .catch((err) => 
     {
@@ -58,6 +58,12 @@ app.get("/api/todo", (req, res) =>
       res.status(500).json({ success: false, message: "Internal Server Error" });
     });
 })
+
+// delete request
+app.delete(("/api/todo/:id", (req, res) =>
+{
+  console.log('am intrat pe DELETE request')
+}))
 
 
 

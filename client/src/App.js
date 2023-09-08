@@ -40,8 +40,22 @@ function App()
   const removeTodo = index => 
   {
     const newTodos = [...todos];
+    console.log(index)
     newTodos.splice(index, 1);
     setTodos(newTodos);
+
+    
+    // send a delete request here
+  //   fetch("http://localhost:5000/api/todo", 
+  //   {
+  //     //HTTP method set to DELETE.
+  //     method: "DELETE",
+  //     //Set the headers that specify you're sending a JSON body request and accepting JSON response
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //       Accept: "application/json",
+  //     }
+  // })
   };
 
   function isOn()

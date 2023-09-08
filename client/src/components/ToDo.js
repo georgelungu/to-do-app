@@ -2,6 +2,9 @@ import React from "react";
 import './ToDo.css'
 
 function Todo({ todo, index, completeTodo, removeTodo }) {
+  console.log("TODO ITEM WITH INDEX: ", index)
+  console.log("TODO ITEM: ", todo)
+
     return (
       <div
         className="todo"

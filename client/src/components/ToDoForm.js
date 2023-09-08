@@ -8,6 +8,8 @@ function TodoForm({ addTodo })
   const handleSubmit = e => 
   {
     e.preventDefault();
+
+    // line 12 - 13 inside the last .then, in order to get the OBJECT ID.
     if (!value) return;
     addTodo(value);
 
@@ -30,6 +32,9 @@ function TodoForm({ addTodo })
       .then((response) => 
       {
         console.log("FETCH RESPONSE: ", response);
+
+        // addTodo(response);
+        // console.log("TO DO FORM VALUE: ", value)
       })
 
       .catch((error) => 
