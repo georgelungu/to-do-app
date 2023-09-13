@@ -2,9 +2,6 @@ import React from "react";
 import './ToDo.css'
 
 function Todo({ todo, index, completeTodo, removeTodo }) {
-  console.log("TODO ITEM WITH INDEX: ", index)
-  console.log("TODO ITEM: ", todo)
-
     return (
       <div
         className="todo"
@@ -12,7 +9,7 @@ function Todo({ todo, index, completeTodo, removeTodo }) {
       >
         {todo.text}
         
-        {/* Complete Button */}
+        {/* Start Complete Button */}
         <div className="button-container">
           <button className="complete" onClick={() => completeTodo(index)}>
             <span className="circle1" />
@@ -24,7 +21,7 @@ function Todo({ todo, index, completeTodo, removeTodo }) {
           </button>
           {/* End Complete Button */}
 
-          {/* Delete Button */}
+          {/* Start Delete Button */}
           <button className="btn" onClick={() => removeTodo(index)}>
             <p className="paragraph"> Delete </p>
             <span className="icon-wrapper">

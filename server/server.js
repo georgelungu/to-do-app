@@ -1,18 +1,23 @@
 const express = require('express');
+const cors = require('cors'); // Import the cors middleware.
 const mongoose = require('mongoose');
 let ToDoModel = require("./model/ToDoSchemaModel.js");
-
 
 // Implementing basic CORS policy, based on the address from where the requests will be made.
 const app = express();
 
-app.use(function(req, res, next) 
-{
-    res.header("Access-Control-Allow-Origin", "http://localhost:3000"); // the address from where the requests will be made.
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-    next();
-});
+// app.use(function(req, res, next) 
+// {
+//     res.header("Access-Control-Allow-Origin", "http://localhost:3000"); // the address from where the requests will be made.
+//     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+//     res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+//     next();
+// });
+
+app.use(cors({
+  origin: 'http://localhost:3000', // Replace with your React app's actual domain.
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // List of allowed HTTP methods.
+}));
 
 app.use(express.json());
 
@@ -50,7 +55,7 @@ app.get("/api/todo", (req, res) =>
     .then((todos) => 
     {
       res.json(todos);
-      console.log("DATA SENT BACK TO CLIENT FROM GET REQ: ", todos)
+      console.log("DATA SENT SUCCESSFULY TO CLIENT")
     })
     .catch((err) => 
     {
@@ -60,10 +65,27 @@ app.get("/api/todo", (req, res) =>
 })
 
 // delete request
-app.delete(("/api/todo/:id", (req, res) =>
+app.delete("/api/todo/:id", (req, res) =>
 {
-  console.log('am intrat pe DELETE request')
-}))
+  console.log("REQ PARAMS ID: ", req.params.id)
+
+  // ToDoModel.findByIdAndRemove({_id: req.params.id})
+  // .then(trimmedToDos => res.json(trimmedToDos)) // this line sends me the data that i have deleted, not the list with the remained item.
+
+  ToDoModel.findByIdAndRemove({ _id: req.params.id })
+    .then(removedItem => {
+      // After removing the item, fetch the remaining items
+      return ToDoModel.find({});
+    })
+    .then(remainingItems => {
+      // Send the remaining items as JSON response
+      res.json(remainingItems);
+    })
+    .catch(error => {
+      // Handle errors here
+      res.status(500).json({ error: "An error occurred" });
+    });
+})
 
 
 

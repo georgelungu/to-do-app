@@ -15,8 +15,8 @@ function App()
     fetch("http://localhost:5000/api/todo")
       .then((res) => res.json())
       .then((data) => {
-        console.log("DATA RECEIVED FROM SERVER: ", data);
-        const newTodos = data.map((item) => ({text: item.title, isCompleted: false})
+        // console.log("DATA RECEIVED FROM SERVER: ", data);
+        const newTodos = data.map((item) => ({text: item.title, isCompleted: false, id: item._id})
         )
         console.log("MAPPED DATA FROM FETCH: ", newTodos);
         setTodos(newTodos); // Update the todos state with the data from the server
@@ -40,22 +40,27 @@ function App()
   const removeTodo = index => 
   {
     const newTodos = [...todos];
-    console.log(index)
-    newTodos.splice(index, 1);
-    setTodos(newTodos);
-
-    
     // send a delete request here
-  //   fetch("http://localhost:5000/api/todo", 
-  //   {
-  //     //HTTP method set to DELETE.
-  //     method: "DELETE",
-  //     //Set the headers that specify you're sending a JSON body request and accepting JSON response
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //       Accept: "application/json",
-  //     }
-  // })
+
+    fetch(`http://localhost:5000/api/todo/${newTodos[index].id}`, 
+    {
+      //HTTP method set to DELETE.
+      method: "DELETE",
+      //Set the headers that specify you're sending a JSON body request and accepting JSON response
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      }
+    })
+    .then(res => res.json())
+    .then(data => console.log("DATA RETURNED AFTER DELETE REQUEST: ", data))
+
+    console.log("ITEM ABOUT TO BE DELETED: ", newTodos[index].id)
+    // you don't actually need to splice in front-end.
+    // you can get the elements returned from fetch and update state with them.
+    newTodos.splice(index, 1);
+
+    setTodos(newTodos);
   };
 
   function isOn()
