@@ -63,6 +63,12 @@ function App()
     setTodos(newTodos);
   };
 
+  const updateToDo = index =>
+  {
+    const newTodos = [...todos]
+    console.log(newTodos[index])
+  }
+
   function isOn()
   {
     setShow(prevShow => !prevShow);
@@ -88,6 +94,7 @@ function App()
             todo={todo}
             completeTodo={completeTodo}
             removeTodo={removeTodo}
+            updateToDo={updateToDo}
           />
         )) : null}
         <TodoForm addTodo={addTodo} />
