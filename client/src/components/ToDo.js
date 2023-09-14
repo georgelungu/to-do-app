@@ -8,6 +8,8 @@ function Todo({ todo, index, completeTodo, removeTodo, updateToDo }) {
         style={{ textDecoration: todo.isCompleted ? "line-through" : "" }}
       >
         {todo.text}
+        {/* Transform each element into an input to update and save it later... */}
+        {/* <input value={todo.text} /> */}
 
         {/* Start Complete Button */}
         <div className="button-container">

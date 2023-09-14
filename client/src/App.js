@@ -66,7 +66,8 @@ function App()
   const updateToDo = index =>
   {
     const newTodos = [...todos]
-    console.log(newTodos[index])
+    console.log(newTodos[index].text)
+    // insert something that would let me to update the element on the screen.
   }
 
   function isOn()
