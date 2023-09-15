@@ -55,7 +55,7 @@ app.get("/api/todo", (req, res) =>
     .then((todos) => 
     {
       res.json(todos);
-      console.log("DATA SENT SUCCESSFULY TO CLIENT")
+      // console.log("DATA SENT SUCCESSFULY TO CLIENT: ", todos)
     })
     .catch((err) => 
     {
@@ -87,11 +87,45 @@ app.delete("/api/todo/:id", (req, res) =>
     });
 })
 
-app.put("/api/todo/:id", (req, res) =>
+app.put("/api/todo/:id", async (req, res) =>
 {
   console.log("PUT REQUEST")
   console.log("REQ BODY: ", req.body)
   console.log("REQ PARAMS ID: ", req.params.id)
+
+  try 
+  {
+    const todoId = req.params.id;
+    const updateData = 
+    {
+      _id: req.body.id,
+      title: req.body.text,
+      comment: req.body.isCompleted,
+      createdAt: req.body.createdAt,
+      __v: 0
+    };
+
+    // Use Mongoose to find and update the ToDo item by its ID.
+    const updatedToDo = await ToDoModel.findByIdAndUpdate(
+      { _id: req.params.id }, 
+      updateData,
+      { new: true });
+
+    if (!updatedToDo) 
+    {
+      return res.status(404).json({ error: "ToDo not found" });
+    }
+
+    res.json(updatedToDo);
+    console.log("THIS is MY updated TODO: ", updatedToDo)
+
+  } 
+
+  catch (error) 
+  {
+    console.error("Error updating ToDo:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
 })
 
 

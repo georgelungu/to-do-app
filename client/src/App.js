@@ -16,7 +16,7 @@ function App()
       .then((res) => res.json())
       .then((data) => {
         // console.log("DATA RECEIVED FROM SERVER: ", data);
-        const newTodos = data.map((item) => ({text: item.title, isCompleted: false, id: item._id})
+        const newTodos = data.map((item) => ({text: item.title, isCompleted: false, id: item._id, createdAt: item.createdAt})
         )
         console.log("MAPPED DATA FROM FETCH: ", newTodos);
         setTodos(newTodos); // Update the todos state with the data from the server
@@ -69,7 +69,6 @@ function App()
 
     const updatedTodos = todos.map((todo, index) => 
     {
-      console.log("TO DO INDEX: ", index)
       if (todo.id === todoId) 
       {
         fetch(`http://localhost:5000/api/todo/${todo.id}`,
@@ -83,6 +82,8 @@ function App()
           // PUT request body as JSON string.
           body: JSON.stringify(todo)
         })
+        .then(data => data.json())
+        .then(info => console.log(info))
 
         return { ...todo, text: newText };
       }

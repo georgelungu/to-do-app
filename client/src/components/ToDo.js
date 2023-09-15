@@ -28,7 +28,7 @@ function Todo({ todo, index, completeTodo, removeTodo, id, updateToDo })
               value={newText}
               onChange={(e) => setNewText(e.target.value)}
             />
-            <button onClick={handleSaveButton}>Save</button>
+            <button className="save" onClick={handleSaveButton}>Save</button>
             
           </div>
         ) 
