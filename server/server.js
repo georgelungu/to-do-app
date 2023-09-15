@@ -89,7 +89,9 @@ app.delete("/api/todo/:id", (req, res) =>
 
 app.put("/api/todo/:id", (req, res) =>
 {
-  
+  console.log("PUT REQUEST")
+  console.log("REQ BODY: ", req.body)
+  console.log("REQ PARAMS ID: ", req.params.id)
 })
 
 

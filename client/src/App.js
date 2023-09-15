@@ -63,11 +63,37 @@ function App()
     setTodos(newTodos);
   };
 
-  const updateToDo = index =>
+  const updateToDo = (todoId, newText) =>
   {
-    const newTodos = [...todos]
-    console.log(newTodos[index].text)
-    // insert something that would let me to update the element on the screen.
+    // console.log("UPDATED TEXT FROM ToDo.js: ", todoId)
+
+    const updatedTodos = todos.map((todo, index) => 
+    {
+      console.log("TO DO INDEX: ", index)
+      if (todo.id === todoId) 
+      {
+        fetch(`http://localhost:5000/api/todo/${todo.id}`,
+        {
+          method: "PUT",
+          headers: 
+          {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          // PUT request body as JSON string.
+          body: JSON.stringify(todo)
+        })
+
+        return { ...todo, text: newText };
+      }
+      return todo;
+    });
+
+    const newTodos = [...updatedTodos]
+
+    setTodos(newTodos)
+    
+    console.log("MODIFIED TODO'S: ",todos)
   }
 
   function isOn()
@@ -92,6 +118,7 @@ function App()
           <Todo
             key={index}
             index={index}
+            id={todo.id}
             todo={todo}
             completeTodo={completeTodo}
             removeTodo={removeTodo}
