@@ -42,8 +42,8 @@ function Todo({ todo, index, completeTodo, removeTodo, id, updateToDo })
             {/* Transform each element into an input to update and save it later... */}
             {/* <input value={todo.text} /> */}
 
-            {/* Start Complete Button */}
             <div className="button-container">
+              {/* Start Complete Button */}
               <button className="complete" onClick={() => completeTodo(index)}>
                 <span className="circle1" />
                 <span className="circle2" />
